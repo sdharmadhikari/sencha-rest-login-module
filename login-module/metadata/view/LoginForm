@@ -1,0 +1,295 @@
+{
+    "type": "Ext.form.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "listeners": [
+            "[",
+            "    {",
+            "        ",
+            "            delegate: '#loginButtonItemId',",
+            "    \t\tevent: 'tap',",
+            "    \t\tfn: 'onLogInButtonTap'",
+            "",
+            "    }",
+            "",
+            "",
+            "]   ",
+            "    "
+        ],
+        "loginUrl": "http://localhost:8080/tusers?find=ByUseridEqualsAndPasswordEquals",
+        "itemId": "loginFormItemId",
+        "designer|userClassName": "LoginForm",
+        "designer|userAlias": "genericLoginForm",
+        "designer|initialView": true
+    },
+    "configAlternates": {
+        "listeners": "array"
+    },
+    "designerId": "554f99b0-5e80-4602-88c3-97fd405ebd93",
+    "customConfigs": [
+        {
+            "group": "(Custom Properties)",
+            "name": "listeners",
+            "type": "string"
+        },
+        {
+            "group": "(Custom Properties)",
+            "name": "loginUrl",
+            "type": "string"
+        }
+    ],
+    "cn": [
+        {
+            "type": "Ext.TitleBar",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "docked": "top",
+                "title": "App Name"
+            },
+            "designerId": "2c46f8a1-6909-4eac-be4f-2c7a61a13b66"
+        },
+        {
+            "type": "Ext.Img",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 101
+            },
+            "designerId": "413e7753-67cb-42a3-9d77-65e58bbc46e5"
+        },
+        {
+            "type": "Ext.Label",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "hidden": true,
+                "hideAnimation": "fadeOut",
+                "html": "Login failed, try again..",
+                "itemId": "signInFailedLabel",
+                "showAnimation": "fadeIn",
+                "style": "color:#990000;"
+            },
+            "designerId": "49673aa3-4632-4729-b78e-3fd749b1a1ce"
+        },
+        {
+            "type": "Ext.form.FieldSet",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": null
+            },
+            "designerId": "0b86bd7b-a3c3-4d68-a22c-4275fd438000",
+            "cn": [
+                {
+                    "type": "Ext.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "userIdItemId",
+                        "label": null,
+                        "name": "userid",
+                        "required": true,
+                        "placeHolder": "Userid.."
+                    },
+                    "designerId": "204d6927-cfa7-4261-85b2-6cc2f2eeec56"
+                },
+                {
+                    "type": "Ext.field.Password",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "passwordItemId",
+                        "label": null,
+                        "name": "userid",
+                        "required": true,
+                        "placeHolder": "Password.."
+                    },
+                    "designerId": "0f963a1c-64fe-4c67-9d65-4e42b5be30e6"
+                }
+            ]
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLogInButtonTap",
+                "implHandler": [
+                    "var me = this,",
+                    "",
+                    "    userIdField = me.down('#userIdItemId'),",
+                    "    passwordField = me.down('#passwordItemId'),",
+                    "    label = me.down('#signInFailedLabel'),",
+                    "",
+                    "    userid = userIdField.getValue(),",
+                    "    password = passwordField.getValue();",
+                    "",
+                    "if(userid.length === 0 || password.length === 0) {",
+                    "    me.showSignInFailedMessage('Please enter your username and password.');",
+                    "    return;",
+                    "}  ",
+                    "",
+                    "label.setHtml('');",
+                    "userIdField.setValue('');",
+                    "passwordField.setValue('');",
+                    "",
+                    "var loginUrl = me.getInitialConfig().loginUrl;",
+                    "",
+                    "Ext.Ajax.request({",
+                    "    url: loginUrl,",
+                    "    method: 'get',",
+                    "    headers : { ",
+                    "        Accept : 'application/json' ",
+                    "    },",
+                    "    params: {",
+                    "        userid: userid,",
+                    "        password: password",
+                    "    },",
+                    "    success: function (response) {        ",
+                    "        var loginResponse = Ext.JSON.decode(response.responseText);",
+                    "        var userObject = loginResponse[0];",
+                    "        if (loginResponse.length === 1 && userObject.userid === userid) {",
+                    "",
+                    "            var tok = userid + ':' + password;",
+                    "            var hash = Base64.encode(tok);",
+                    "            var authHeaderValue = \"Basic \" + hash;",
+                    "            userObject.authHeaderValue = authHeaderValue ;",
+                    "",
+                    "            me.fireEvent('signInSuccess',userObject);",
+                    "        } else {",
+                    "            me.showSignInFailedMessage('Bad Credentials');",
+                    "        }",
+                    "    },",
+                    "    failure: function (response) {",
+                    "        me.showSignInFailedMessage('Server error. Please try again later.');",
+                    "    }",
+                    "});"
+                ]
+            },
+            "designerId": "29298f78-e7ac-49de-b6ac-f5d4d03844ba"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "showSignInFailedMessage",
+                "designer|params": [
+                    "message"
+                ],
+                "implHandler": [
+                    "var label = this.down('#signInFailedLabel');",
+                    "label.setHtml(message);",
+                    "label.show();"
+                ]
+            },
+            "designerId": "4b9922e4-6c81-49b9-945f-c4835330620b"
+        },
+        {
+            "type": "Ext.form.FieldSet",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": null
+            },
+            "designerId": "5df9b3c8-5261-4b09-abfb-ed6a817d0cdd",
+            "cn": [
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "loginButtonItemId",
+                        "ui": "action",
+                        "text": "Log In"
+                    },
+                    "designerId": "e591496a-63b7-4efb-9b42-4e683f5b9100"
+                }
+            ]
+        },
+        {
+            "type": "Ext.form.FieldSet",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": null
+            },
+            "designerId": "60befd05-706d-401b-9048-1fdf1d9d9781",
+            "cn": [
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "ui": "confirm",
+                        "text": "Snap Sign Up !"
+                    },
+                    "designerId": "a936079e-a844-4185-8e36-822c6b61eeeb",
+                    "cn": [
+                        {
+                            "type": "fixedfunction",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "handler",
+                                "designer|params": [
+                                    "button",
+                                    "event"
+                                ],
+                                "implHandler": [
+                                    "var loginForm = this.up('#loginFormItemId');",
+                                    "loginForm.fireEvent('signUpRequested');"
+                                ]
+                            },
+                            "designerId": "57fd8efe-498e-4789-b2f5-c4c0ba969a8f"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
