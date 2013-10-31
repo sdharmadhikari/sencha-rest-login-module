@@ -18,7 +18,7 @@ Ext.define('MyApp.view.LoginForm', {
     alias: 'widget.genericLoginForm',
 
     config: {
-        loginUrl: 'http://localhost:8080/tusers?find=ByUseridEqualsAndPasswordEquals',
+        loginUrl: 'http://localhost:8080/appusers?find=ByUseridEqualsAndPasswordEquals',
         itemId: 'loginFormItemId',
         listeners: [
             {
@@ -124,7 +124,7 @@ Ext.define('MyApp.view.LoginForm', {
                 userid: userid,
                 password: password
             },
-            success: function (response) {        
+            success: function (response) {  
                 var loginResponse = Ext.JSON.decode(response.responseText);
                 var userObject = loginResponse[0];
                 if (loginResponse.length === 1 && userObject.userid === userid) {
@@ -133,10 +133,9 @@ Ext.define('MyApp.view.LoginForm', {
                     var hash = Base64.encode(tok);
                     var authHeaderValue = "Basic " + hash;
                     userObject.authHeaderValue = authHeaderValue ;
-
                     me.fireEvent('signInSuccess',userObject);
                 } else {
-                    me.showSignInFailedMessage('Bad Credentials');
+                    me.showSignInFailedMessage('Bad Userid or Password');
                 }
             },
             failure: function (response) {

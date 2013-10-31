@@ -9,6 +9,9 @@
         "views": [
             "LoginForm"
         ],
+        "controllers": [
+            "SampleController"
+        ],
         "name": "MyApp"
     },
     "designerId": "application"

@@ -22,6 +22,9 @@ Ext.application({
     views: [
         'LoginForm'
     ],
+    controllers: [
+        'SampleController'
+    ],
     name: 'MyApp',
 
     launch: function() {

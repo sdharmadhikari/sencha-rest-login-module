@@ -28,6 +28,20 @@
                 "metadata/resource/Library"
             ],
             "className": "Library"
+        },
+        "dff16f8a-2fed-4d84-8876-09e1f34055e2": {
+            "paths": [
+                "metadata/resource/js"
+            ],
+            "className": "js"
+        },
+        "2a60c6ae-8467-4895-9323-4864759a8f13": {
+            "paths": [
+                "metadata/controller/SampleController",
+                "app/controller/override/SampleController.js",
+                "app/controller/SampleController.js"
+            ],
+            "className": "SampleController"
         }
     },
     "viewOrderMap": {
@@ -35,10 +49,13 @@
             "554f99b0-5e80-4602-88c3-97fd405ebd93"
         ],
         "store": [],
-        "controller": [],
+        "controller": [
+            "2a60c6ae-8467-4895-9323-4864759a8f13"
+        ],
         "model": [],
         "resource": [
-            "6b1bcf6d-cfdc-4487-8be3-c2b2f2917a71"
+            "6b1bcf6d-cfdc-4487-8be3-c2b2f2917a71",
+            "dff16f8a-2fed-4d84-8876-09e1f34055e2"
         ],
         "app": [
             "application"

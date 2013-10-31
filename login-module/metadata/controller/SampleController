@@ -1,0 +1,56 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "SampleController"
+    },
+    "designerId": "2a60c6ae-8467-4895-9323-4864759a8f13",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLoginFormItemIdSignInSuccess",
+                "designer|params": [
+                    "formpanel"
+                ],
+                "implHandler": [
+                    "Ext.Msg.alert(\"This alert is from SampleController. Replace it with your and take appropriate action\");"
+                ],
+                "name": "signInSuccess",
+                "designer|targetType": "LoginForm",
+                "designer|controlQuery": "formpanel"
+            },
+            "designerId": "99249452-1ff5-41d8-94d2-757c2569f64d"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLoginFormItemIdSignUpRequested",
+                "designer|params": [
+                    "formpanel"
+                ],
+                "implHandler": [
+                    "Ext.Msg.alert(\"Use sencha-rest-signup module for the implementation.\");"
+                ],
+                "name": "signUpRequested",
+                "designer|targetType": "LoginForm",
+                "designer|controlQuery": "formpanel"
+            },
+            "designerId": "8dfc78e2-fd8d-42d0-b08d-b633dce20d4f"
+        }
+    ]
+}
