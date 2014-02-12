@@ -2,7 +2,7 @@ sencha-rest-login-module
 ========================
 
 
-Login Module For Sencha Touch.
+Login Module For Sencha Touch using RESTful service to server. This module and my sencha-rest-signup-module works together and can be reused across multiple Sencha Touch projects to avoid rewriting of sign-in and sign-up code again and again. 
 
 Pluggable Login Component for Sencha Touch.
 * All handlers are inside the component and not in controllers. This has been done to make sure component is pluggable easily in other Sencha Touch Projects.
